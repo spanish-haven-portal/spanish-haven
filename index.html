@@ -6,93 +6,106 @@
   <title>Spanish Haven Portal</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f5f9fa;
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://i.imgur.com/Hwo2Npl.jpg') no-repeat center center fixed;
+      background-size: cover;
       margin: 0;
       padding: 0;
-      color: #333;
+      color: #352f44;
     }
     header {
-      background: #2a7f8e;
+      background: rgba(80, 70, 130, 0.85);
       color: white;
       padding: 1em;
       text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1em;
+    }
+    header img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid white;
     }
     nav {
       display: flex;
       justify-content: center;
-      background: #dff1f3;
+      background: rgba(255, 255, 255, 0.75);
       padding: 1em;
+      flex-wrap: wrap;
+      gap: 0.5em;
     }
     nav button {
-      margin: 0 1em;
-      padding: 0.5em 1em;
+      padding: 0.6em 1.2em;
       border: none;
-      background: #2a7f8e;
+      border-radius: 10px;
+      background: #745ba5;
       color: white;
+      font-weight: bold;
       cursor: pointer;
     }
     .content {
+      background: rgba(255, 255, 255, 0.85);
+      margin: 1em auto;
       padding: 2em;
+      max-width: 800px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.1);
     }
     .thermometer {
       width: 100px;
       height: 300px;
-      border: 2px solid #ccc;
+      border: 2px solid #aaa;
       border-radius: 50px;
       margin: 2em auto;
       position: relative;
-      background: linear-gradient(to top, #2a7f8e 20%, #fff 20%);
+      background: linear-gradient(to top, #a58fd4 20%, #fff 20%);
     }
     .thermometer-fill {
       position: absolute;
       bottom: 0;
       width: 100%;
-      background-color: #2a7f8e;
+      background-color: #745ba5;
       border-radius: 50px;
-    }
-    .thermometer-labels {
-      text-align: center;
-    }
-    .quiz-question {
-      margin-bottom: 1.5em;
-    }
-    textarea {
-      width: 100%;
-      min-height: 100px;
-      padding: 0.5em;
-      margin-top: 0.5em;
+      transition: height 0.5s ease-in-out;
     }
     .message-luz {
       margin-top: 2em;
       padding: 1em;
-      background: #eef6f8;
-      border: 1px solid #b5d1d6;
+      background: #efe6fa;
+      border: 1px solid #d6c3f0;
+      border-radius: 10px;
     }
-    .flashcards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1em;
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.7em;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1em;
+    }
+    audio {
+      margin-top: 1em;
+    }
+    .checklist, .flashcards {
+      margin-top: 1em;
     }
     .card {
       background: white;
       border: 1px solid #ccc;
       padding: 1em;
+      border-radius: 10px;
       width: 150px;
-      text-align: center;
       box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-    }
-    .checklist {
-      margin-top: 1em;
-    }
-    audio {
-      margin-top: 1em;
+      text-align: center;
     }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Teacher_icon.svg/1024px-Teacher_icon.svg.png" alt="Luz" style="width:60px; vertical-align:middle; margin-right:10px; border-radius: 50%;">
+    <img src="https://i.imgur.com/mO2dA58.png" alt="Luz" />
     <span style="font-size: 1.8em; vertical-align:middle; color: white;">Spanish Haven Portal</span>
   </header>
 
@@ -106,83 +119,44 @@
   </nav>
 
   <main id="main-sections">
+    <section id="daily-compass" class="content">
+      <h2>🧭 Daily Compass</h2>
+      <p id="daily-task">Loading your mission from Luz...</p>
+      <div id="quote-of-the-day">
+        <h3>🕯️ Quote of the Day</h3>
+        <blockquote id="daily-quote"></blockquote>
+        <p id="quote-meaning"></p>
+      </div>
+    </section>
 
-  <!-- Sections included below -->
+    <section id="luz-cafe" class="content">
+      <h2>💬 Luz Chat Café</h2>
+      <p>Ask Luz anything casual in Spanish or about Spanish. He'll respond like a mentor-friend.</p>
+      <textarea id="chat-input" placeholder="Type your question or thought here..."></textarea>
+      <button onclick="respondFromLuz()">Send</button>
+      <div id="luz-response" class="message-luz"></div>
+    </section>
 
-  <section id="daily-compass" class="content">
-    <h2>🧭 Daily Compass</h2>
-    <p id="daily-task">Loading your mission from Luz...</p>
-    <div id="quote-of-the-day">
-      <h3>🕯️ Quote of the Day</h3>
-      <blockquote id="daily-quote"></blockquote>
-      <p id="quote-meaning"></p>
-    </div>
-  </section>
-
-  <section id="luz-cafe" class="content">
-    <h2>💬 Luz Chat Café</h2>
-    <p>Ask Luz anything casual in Spanish or about Spanish. He'll respond like a mentor-friend.</p>
-    <textarea id="chat-input" placeholder="Type your question or thought here..."></textarea>
-    <button onclick="respondFromLuz()">Send</button>
-    <div id="luz-response" class="message-luz"></div>
-  </section>
-
-  <section id="progress-dashboard" class="content">
-    <h2>📚 Weekly Progress Dashboard</h2>
-    <ul>
-      <li>✔️ Lessons Completed: <span id="lessons-completed">0</span></li>
-      <li>💬 Practice Days Logged: <span id="practice-days">0</span></li>
-      <li>🎯 Daily Missions Completed: <span id="missions-completed">0</span></li>
-      <li>🔥 Streak Tracker: <span id="streak-tracker">0 days</span></li>
-    </ul>
-  </section>
-
-  <section id="mirror-mode" class="content">
-    <h2>🪞 Mirror Mode (Pronunciation)</h2>
-    <ul>
-      <li><audio controls src="audio/hola.mp3"></audio> Hola <input type="checkbox" /></li>
-      <li><audio controls src="audio/como-estas.mp3"></audio> ¿Cómo estás? <input type="checkbox" /></li>
-      <li><audio controls src="audio/muy-bien.mp3"></audio> Muy bien <input type="checkbox" /></li>
-    </ul>
-  </section>
-
-  <section id="clara-vault" class="content">
-    <h2>🎁 Clara’s Journal Vault</h2>
-    <textarea placeholder="Write your entry here..."></textarea>
-    <button onclick="saveJournalEntry()">Save Entry</button>
-    <div id="journal-log"></div>
-  </section>
-
-  <section id="check-in" class="content">
-    <h2>✅ Daily Check-In</h2>
-    <p>Mark your attendance and keep your streak alive!</p>
-    <button onclick="checkInToday()">Check In</button>
-    <div id="check-in-status"></div>
-  </section>
-
+    <section id="check-in" class="content">
+      <h2>✅ Daily Check-In</h2>
+      <p>Mark your attendance and keep your streak alive!</p>
+      <button onclick="checkInToday()">Check In</button>
+      <div id="check-in-status"></div>
+    </section>
   </main>
 
   <script>
-    const dailyMissions = [
-      '🎯 Use 3 new verbs in your journal today.',
-      '🔍 Watch a video and list 5 new words.',
-      '🗣️ Practice introducing yourself aloud.'
-    ];
-
-    const quotes = [
-      { spanish: 'El saber no ocupa lugar.', meaning: 'Knowledge doesn’t take up space.' },
-      { spanish: 'A mal tiempo, buena cara.', meaning: 'Put on a brave face in hard times.' },
-      { spanish: 'Más vale tarde que nunca.', meaning: 'Better late than never.' }
-    ];
-
-    function setDailyCompass() {
-      const task = dailyMissions[Math.floor(Math.random() * dailyMissions.length)];
-      document.getElementById('daily-task').textContent = task;
-      const chosen = quotes[Math.floor(Math.random() * quotes.length)];
-      document.getElementById('daily-quote').textContent = chosen.spanish;
-      document.getElementById('quote-meaning').textContent = chosen.meaning;
+    function showContent(id) {
+      const sections = document.querySelectorAll('main > section');
+      sections.forEach(sec => sec.style.display = 'none');
+      const target = document.getElementById(id);
+      if (target) target.style.display = 'block';
     }
-
+    function checkInToday() {
+      const status = document.getElementById('check-in-status');
+      const today = new Date().toLocaleDateString();
+      status.innerHTML = `<p>📅 Checked in on ${today}</p>`;
+    }
     function respondFromLuz() {
       const input = document.getElementById('chat-input').value.trim();
       const responseBox = document.getElementById('luz-response');
@@ -192,33 +166,7 @@
         responseBox.textContent = 'Luz says: Ask me something real, Clara 😄';
       }
     }
-
-    function saveJournalEntry() {
-      const vault = document.getElementById('journal-log');
-      const textarea = document.querySelector('#clara-vault textarea');
-      if (textarea.value.trim()) {
-        const entry = document.createElement('div');
-        entry.textContent = `📝 ${textarea.value.trim()}`;
-        vault.appendChild(entry);
-        textarea.value = '';
-      }
-    }
-
-    function showContent(id) {
-      const sections = document.querySelectorAll('main > section');
-      sections.forEach(sec => sec.style.display = 'none');
-      const target = document.getElementById(id);
-      if (target) target.style.display = 'block';
-    }
-
-    function checkInToday() {
-      const status = document.getElementById('check-in-status');
-      const today = new Date().toLocaleDateString();
-      status.innerHTML = `<p>📅 Checked in on ${today}</p>`;
-    }
-
     window.addEventListener('load', () => {
-      setDailyCompass();
       showContent('daily-compass');
     });
   </script>
