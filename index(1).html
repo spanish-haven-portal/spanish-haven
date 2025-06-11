@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spanish Haven Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f9fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #2a7f8e;
+      color: white;
+      padding: 1em;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #dff1f3;
+      padding: 1em;
+    }
+    nav button {
+      margin: 0 1em;
+      padding: 0.5em 1em;
+      border: none;
+      background: #2a7f8e;
+      color: white;
+      cursor: pointer;
+    }
+    .content {
+      padding: 2em;
+    }
+    .thermometer {
+      width: 100px;
+      height: 300px;
+      border: 2px solid #ccc;
+      border-radius: 50px;
+      margin: 2em auto;
+      position: relative;
+      background: linear-gradient(to top, #2a7f8e 20%, #fff 20%);
+    }
+    .thermometer-fill {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: #2a7f8e;
+      border-radius: 50px;
+    }
+    .thermometer-labels {
+      text-align: center;
+    }
+    .quiz-question {
+      margin-bottom: 1.5em;
+    }
+    textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.5em;
+      margin-top: 0.5em;
+    }
+    .message-luz {
+      margin-top: 2em;
+      padding: 1em;
+      background: #eef6f8;
+      border: 1px solid #b5d1d6;
+    }
+    .flashcards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1em;
+    }
+    .card {
+      background: white;
+      border: 1px solid #ccc;
+      padding: 1em;
+      width: 150px;
+      text-align: center;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    }
+    .checklist {
+      margin-top: 1em;
+    }
+    audio {
+      margin-top: 1em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌅 Spanish Haven Portal</h1>
+  </header>
+
+  <nav>
+    <button onclick="showContent('daily-compass')">🧭 Daily Compass</button>
+    <button onclick="showContent('luz-cafe')">💬 Luz Café</button>
+    <button onclick="showContent('progress-dashboard')">📚 Dashboard</button>
+    <button onclick="showContent('mirror-mode')">🪞 Mirror Mode</button>
+    <button onclick="showContent('clara-vault')">🎁 Journal Vault</button>
+  </nav>
+
+  <main id="main-sections">
+    <!-- Sections will go here (trimmed for brevity) -->
+  </main>
+
+  <script>
+    function showContent(id) {
+      const sections = document.querySelectorAll('main > section');
+      sections.forEach(sec => sec.style.display = 'none');
+      const target = document.getElementById(id);
+      if (target) target.style.display = 'block';
+    }
+
+    window.addEventListener('load', () => {
+      showContent('daily-compass');
+    });
+  </script>
+</body>
+</html>
